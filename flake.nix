@@ -310,10 +310,10 @@
 
           # Shell for hacking on this flake itself.
           devShells.default = pkgs.mkShell {
-            name = "rust-dev-flake";
+            name = "rust-projects";
             packages = formatTools ++ lspTools;
             shellHook = ''
-              echo "rust-dev-flake · lib API: mkRustProject · mkRustShell · mkRustPackage · mkChecks · mkToolchain"
+              echo "rust-projects · lib API: mkRustProject · mkRustShell · mkRustPackage · mkChecks · mkToolchain"
             '';
           };
 
@@ -327,8 +327,8 @@
       # Applies `f` to this flake's per-system lib and transposes the result
       # into flake output shape, so a consumer needs exactly one input:
       #
-      #   outputs = { rust-dev, ... }:
-      #     rust-dev.forEachSystem (lib: lib.mkRustProject { ... });
+      #   outputs = { rust-projects, ... }:
+      #     rust-projects.forEachSystem (lib: lib.mkRustProject { ... });
       #
       # turns {system → {devShells, packages, …}} into {devShells.<system>, …}
       forEachSystem =

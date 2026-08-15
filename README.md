@@ -1,4 +1,4 @@
-# rust-dev
+# rust-projects
 
 One deterministic Rust toolchain pin, shared by every Rust project in `~/dev/projects`.
 
@@ -16,11 +16,11 @@ A consumer flake is the whole integration:
 {
   description = "my-crate — …";
 
-  inputs.rust-dev.url = "path:../../nix";
+  inputs.rust-projects.url = "github:obazin/rust-projects";
 
   outputs =
-    { rust-dev, ... }:
-    rust-dev.forEachSystem (
+    { rust-projects, ... }:
+    rust-projects.forEachSystem (
       lib:
       lib.mkRustProject {
         name = "my-crate";
@@ -53,7 +53,7 @@ This is why the channel must be an exact version and never `stable`.
 
 ## Library API
 
-`rust-dev.lib.${system}` exposes:
+`rust-projects.lib.${system}` exposes:
 
 | Name | Purpose |
 | --- | --- |
@@ -65,7 +65,7 @@ This is why the channel must be an exact version and never `stable`.
 | `rustPlatformFor` | `makeRustPlatform` bound to a toolchain, if you need to build something custom |
 | `toolchain`, `pkgs`, `cargoTools`, `lspTools`, `formatTools`, `cacheTools` | The pieces, for hand-rolled shells |
 
-`rust-dev.forEachSystem` applies a function to the per-system lib and transposes the result into flake output shape, so consumers need no `flake-utils` input of their own.
+`rust-projects.forEachSystem` applies a function to the per-system lib and transposes the result into flake output shape, so consumers need no `flake-utils` input of their own.
 
 ### Native dependencies
 
