@@ -1,0 +1,18 @@
+# Canonical Rust pin for every project consuming this flake.
+#
+# This is the single source of truth. Consumers do not carry their own copy:
+# the dev shell materializes this file at the project root (as a symlink into
+# the Nix store) so rustup and Nix read the same pin.
+#
+# The channel is an exact version, never "stable". fenix verifies the channel
+# manifest against the sha256 recorded in flake.nix, which makes the toolchain
+# a fixed-output derivation — `nix flake update` cannot change the compiler.
+# Bumping Rust is therefore a deliberate two-line commit (version + hash),
+# not a side effect of updating inputs.
+#
+# 1.95.0 is the version already pinned across the estate; edition 2024 needs
+# >= 1.85, so this covers both edition 2021 and 2024 crates.
+[toolchain]
+channel = "1.95.0"
+components = ["rust-src", "clippy", "rustfmt", "rust-analyzer"]
+profile = "minimal"
