@@ -19,7 +19,7 @@
     }:
     let
       # ── The canonical pin ────────────────────────────────────────────────
-      # `sha256` is the hash of the 1.95.0 channel manifest. It is
+      # `sha256` is the hash of the 1.99.0 channel manifest. It is
       # platform-independent, so one value covers every system. Because fenix
       # turns it into a fixed-output derivation, bumping `fenix` or `nixpkgs`
       # cannot move the compiler — only editing these two values can.
@@ -28,7 +28,7 @@
       # defaultSha256 to lib.fakeSha256, build once, and paste the hash Nix
       # prints. Both edits land in one reviewable commit.
       defaultToolchainFile = ./rust-toolchain.toml;
-      defaultSha256 = "sha256-gh/xTkxKHL4eiRXzWv8KP7vfjSk61Iq48x47BEDFgfk=";
+      defaultSha256 = "sha256-zm3dyIY2T414ZRR3EhLOvptzG6gta4WZUcawzMUWtqI=";
 
       # x86_64-darwin is excluded: nixpkgs dropped it in 2026-07.
       supportedSystems = [

@@ -10,9 +10,9 @@
 # Bumping Rust is therefore a deliberate two-line commit (version + hash),
 # not a side effect of updating inputs.
 #
-# 1.95.0 is the version already pinned across the estate; edition 2024 needs
+# 1.99.0 is the latest stable as of 2026-10; edition 2024 needs
 # >= 1.85, so this covers both edition 2021 and 2024 crates.
 [toolchain]
-channel = "1.95.0"
+channel = "1.99.0"
 components = ["rust-src", "clippy", "rustfmt", "rust-analyzer"]
 profile = "minimal"
