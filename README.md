@@ -111,7 +111,7 @@ lib.mkRustProject {
 ## What the shell provides
 
 - **Toolchain** — rustc, cargo, clippy, rustfmt, rust-src and **rust-analyzer**, all from the same release. The analyzer is a toolchain component rather than a separate nixpkgs package, so it can never drift from the compiler.
-- **LSPs** — `nixd`, `marksman`, `bash-language-server`, and `taplo` for TOML.
+- **LSPs** — `nixd`, `marksman` (Linux only for now: on macOS it needs a .NET runtime the binary cache doesn't have), `bash-language-server`, and `taplo` for TOML.
 - **Cargo tools** — `cargo-nextest`, `cargo-audit`, `cargo-deny`, `cargo-outdated`, `cargo-edit`, `cargo-watch`.
 - **Formatters/linters** — `taplo`, `nixfmt`, `shellcheck`.
 - **Two caches** — `CARGO_HOME` pinned to the project root, so the registry is per-project and disposable; and `sccache` via `RUSTC_WRAPPER`, whose store is host-global. Because every consumer shares one toolchain pin, they also share compiled dependencies: the pin and the cache reinforce each other. `sccache --show-stats` for the hit rate.

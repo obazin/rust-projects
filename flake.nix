@@ -84,12 +84,18 @@
 
           # rust-analyzer is NOT listed here: it ships as a toolchain component,
           # so the analyzer and rustc always come from the same release.
-          lspTools = with pkgs; [
-            nixd # Nix
-            marksman # Markdown
-            bash-language-server # sh
-            # taplo is both the TOML LSP and the TOML formatter (see formatTools)
-          ];
+          lspTools =
+            with pkgs;
+            [
+              nixd # Nix
+              bash-language-server # sh
+              # taplo is both the TOML LSP and the TOML formatter (see formatTools)
+            ]
+            # marksman (Markdown) needs the .NET runtime, which the binary
+            # cache doesn't have for aarch64-darwin at the pinned nixpkgs:
+            # every dev shell would build .NET from source for hours. Linux
+            # only until the cache has it.
+            ++ lib.optionals (!stdenv.hostPlatform.isDarwin) [ marksman ];
 
           formatTools = with pkgs; [
             taplo # TOML
