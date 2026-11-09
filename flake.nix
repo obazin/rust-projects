@@ -71,7 +71,13 @@
             cargo-nextest # test runner
             cargo-audit # RUSTSEC advisories
             cargo-deny # licence / ban / advisory policy
-            cargo-outdated
+            # nixpkgs' cargo-outdated 0.19.0 fails to link on darwin
+            # (`library not found for -lsqlite3`): its cargo dependency links
+            # sqlite, which the package doesn't list. Drop the override once
+            # nixpkgs adds it.
+            (cargo-outdated.overrideAttrs (previous: {
+              buildInputs = (previous.buildInputs or [ ]) ++ [ sqlite ];
+            }))
             cargo-edit # cargo add/rm/upgrade
             cargo-watch
           ];
